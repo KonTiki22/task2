@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.2</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.2</h2>
+	<p>2.2. Задан массив [9,8,7,6,5,4,3,2,1]. Создайте две копии данного массива разными способами и поменяйте в них порядок на обратный так же двумя способами. Выведите все три массива.</p>
+	<input type="button" id="btn" value="Вывести массивы">
+	<div style="width: 70%; margin: auto;">
+		<h3></h3>
+		<p id = "par" style="text-align: left;"></p>
+		<h3></h3>
+		<p style="text-align: left;"></p>
+	</div>
+</div>
+<script>
+function change()	{
+	var par = document.getElementsByTagName("p");
+	var h3 = document.getElementsByTagName("h3");
+	var a = [9,8,7,6,5,4,3,2,1];
+	var b = a.slice(0, a.length);
+	var c = [];
+	for(elem of a) {c.push(elem);}
+	var d = Array.from(a);
+	h3[0].innerHTML = "Создание копии массива";
+	par[1].innerHTML = `a = [${a.join(", ")}] <br><br>`;
+	par[1].innerHTML += `<b>Первый способ:</b><br>`;
+	par[1].innerHTML += `var b = a.slice(0, a.length); b = [${b.join(", ")}] <br><br>`;
+	par[1].innerHTML += `<b>Второй способ:</b><br>`;
+	par[1].innerHTML += `var c = []; for(elem of a) {c.push(elem);} c = [${c.join(", ")}] <br><br>`;
+	par[1].innerHTML += `<b>Третий способ:</b><br>`;
+	par[1].innerHTML += `var d = Array.from(a); d = [${d.join(", ")}] <br><br>`;
+
+
+	b.reverse();
+	c = c.map((item,index) => c[c.length-1-index]);
+
+	h3[1].innerHTML = "Обратный порядок";
+	par[2].innerHTML += `<b>Первый способ:</b><br>`;
+	par[2].innerHTML += `b.reverse(); b = [${b.join(", ")}] <br><br>`;
+	par[2].innerHTML += `<b>Второй способ:</b><br>`;
+	par[2].innerHTML += `c.map((item,index) => c[c.length-1-index]); c = [${c.join(", ")}] <br><br>`;
+	console.log(c);
+	
+	par.innerHTML += `c = [${c.join(", ")}] <br>`;
+}
+
+btn = document.getElementById("btn");
+btn.onclick = change;
+
+</script>
+</body>
+</html>

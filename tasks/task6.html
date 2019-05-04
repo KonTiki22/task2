@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.6</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.6</h2>
+	<p>2.6. Есть переменная, в которую через запятую перечислены сокращения дней недели. Преобразовав данную переменную в массив и используя перебор, добавьте к заданию №3 новое свойство объекта. Создайте метод вывода на экран сокращенного текущего дня недели. </p>
+	<br>
+	<input type="button" id="btn" value="Вывести день">
+	<p id = "par"></p>
+</div>
+<script>
+function change()	{
+	var par = document.getElementById("par");
+	var week = {
+		1 : "Понедельник",
+		2 : "Вторник",
+		3 : "Среда",
+		4 : "Четверг",
+		5 : "Пятница",
+		6 : "Суббота",
+		7 : "Воскресенье",
+		"getDay" : ()=>{
+			var str = "Пн,Вт,Ср,Чт,Пт,Сб,Вс";
+			var days = str.split(",");
+			return days[now.getDay()-1];
+		}
+	}
+	var now = new Date();
+	par.innerHTML = `Текущий день недели: ${week[now.getDay()]}, ${week.getDay()}.`;
+}
+
+btn = document.getElementById("btn");
+btn.onclick = change;
+
+//btn.addEventListener("click", num, false);
+
+</script>
+</body>
+</html>

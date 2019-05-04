@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.3</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+	<style>
+		#ttt {
+			width: 100%;
+			height: 200px;
+			font-family: "Roboto", sans-serif, Helvetica, Arial;
+			font-size: 14px;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		#lng {
+			width: 200px;
+		}
+		#result {
+			width: 100%;
+			margin:10px auto;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.3</h2>
+	<p>2.3. Используя ассоциативный массив, создайте функцию для перевода заданной строки на необходимый язык. Переводимые слова и фразы ограничены заданным набором (для примера 4 слова).</p>
+	<textarea id="ttt" placeholder="Введите текст для перевода"></textarea>
+	<span>Перевести текст на </span>
+	<select id="lng">
+	</select>
+	<br>
+	<br>
+	<input type="button" id="btn" value="Перевести">
+	<h3 id="hd"></h3>
+	<div id = "result"></div>
+	<br>
+</div>
+<script>
+
+var trpar = {
+	texts:{},
+	key:"trnsl.1.1.20190503T005227Z.9b2262f9baf40542.caa62e546bc9cd2d81ab28071167a69723997c2b",
+	api:"https://translate.yandex.net/api/v1.5/tr.json/translate",
+	translate: function (text, callback) {
+		callback();
+	}
+}
+var lng = document.getElementById("lng");
+var request = new XMLHttpRequest();
+request.responseType = 'text';
+request.open('GET', `https://translate.yandex.net/api/v1.5/tr.json/getLangs?ui=ru&key=${trpar.key}&`, true);
+request.send();
+var answ = {};
+var langs = {};
+request.onload = function() {
+	answ = JSON.parse(request.response);
+	for(key in answ.langs) {
+		langs[answ.langs[key]] = key;
+	}
+	for(key of Object.keys(langs).sort()) {
+		var opt = document.createElement('option');
+	    opt.innerHTML = key;
+	    lng.appendChild(opt);
+	}
+}
+var btn = document.getElementById("btn");
+btn.onclick = function () {
+	trpar.texts = ttt.value;
+	request.open('GET', `${trpar.api}?lang=${langs[lng.value]}&text=${trpar.texts}&key=${trpar.key}&options=1&format=html&`, true);
+	request.send();
+	request.onload = function() {
+		hd.innerHTML = "Перевод:";
+		result.innerHTML = (JSON.parse(request.response)["text"]);
+	}
+}
+</script>
+</body>
+</html>

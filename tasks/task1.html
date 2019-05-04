@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.1</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.1</h2>
+	<p>2.1. Используя методы строк charAt, split и toUpperCase, создайте функцию,  которая преобразует строку вида "background-color" в "backgroundColor",  т.е. удаляет знак "-" и преобразует последующую букву в заглавную.</p>
+	<input type="text" id="num1" size="10">
+	<br>
+	<input type="button" id="btn" value="Преобразовать">
+	<p id = "par"></p>
+</div>
+<script>
+function change()	{
+	var a = document.getElementById("num1").value;
+	var par = document.getElementById("par");
+	var arr = a.split("");
+	for(e of arr) {
+		console.log(e);
+	}
+	for(var i = arr.length; i>=0;--i) {
+		if(arr[i] == "-") {
+			arr[i+1] = arr[i+1].toUpperCase();
+			arr.splice(i, 1);
+		}
+	}
+
+	par.innerHTML = "Результат: " + arr.join("");
+
+}
+
+btn = document.getElementById("btn");
+btn.onclick = change;
+
+</script>
+</body>
+</html>

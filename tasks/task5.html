@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.5</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.5</h2>
+	<p>2.5. Создайте объект "персонал", содержащий должности и имена. Скопируйте его в объект "персонал 2" и поменяйте в нем имена. Выведите оба объекта, предварительно преобразовав их в строку и используя знаки переноса строки.</p>
+	<br>
+	<input type="button" id="btn" value="Вывести объекты">
+	<h3 ></h3>
+	<ul ></ul>
+	<br><br>
+	<h3 ></h3>
+	<ul ></ul>
+	<p id = "par"></p>
+</div>
+<script>
+function change()	{
+	var hs = document.getElementsByTagName("h3");
+	var lists = document.getElementsByTagName("ul");
+	var staff = {
+		"director" : "Ivan",
+		"manager" : "Olga",
+		"designer" : "Victor",
+		"photographer" : "Maria",
+		"programmer" : "Peter",
+		"cleaner" : "Igor",
+	}
+	var names = ["Svetlana", "Kiril", "Grigoriy", "Natalia", "Boris", "Ksenia"]
+	var i = 0;
+
+	var staff2 = {};
+	for(key in staff) {
+		staff2[key] = names[i++];
+	}
+
+	var sl = [staff, staff2];
+	console.log(staff2);
+	for(i in sl) {
+		hs[i].innerHTML = `Staff ${+i+1}:` 
+		for(key in sl[i]) {
+			var newLi = document.createElement('li');
+			newLi.innerHTML = `	${sl[i][key]} : ${key} `;
+			lists[i].appendChild(newLi);
+			//par.innerHTML += `${key} : ${staff[key]} <br>`
+		}
+	}
+
+}
+
+btn = document.getElementById("btn");
+btn.onclick = change;
+
+//btn.addEventListener("click", num, false);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задание 2.6</title>
+	<link rel="stylesheet" type="text/css" href="taskstyle.css">
+</head>
+<body>
+<div id = "form">
+	<h2>Задание 2.7</h2>
+	<p>2.7.  Создайте объект "предметы", со свойством, в котором через запятую перечислены предметы, преподаваемые в университете/школе(перечислите 2-6). Напишите к нему функцию, которая будет добавлять предмет, если его
+ еще там нет. Используйте для этого преобразование в массив и свойства массивов split, join, push. Дополнение*: Удалите предмет, если он уже там есть с помощью свойства splice.</p>
+	<p></p>
+	<input type="text" id="num1" size="10" placeholder="Предмет">
+	<br>
+	<input type="button" id="btn" value="Добавить предмет">
+	<br>
+	<input type="button" id="btn2" value="Удалить предмет">
+	<p id = "par"></p>
+</div>
+<script>
+var par = document.getElementsByTagName("p");
+var subjects = {
+	"subjects" : "математика, информатика, английский, веб-программирование, физика",
+	"add" : function(subj) {
+		this.subjects = this.subjects.split(", ");
+		if(this.subjects.indexOf(subj) == -1 && subj) {
+			this.subjects.push(subj);
+		}
+		this.subjects = this.subjects.join(", ");
+	},
+
+	"del" : function(subj) {
+		this.subjects = this.subjects.split(", ");
+		var index = this.subjects.indexOf(subj);
+		if(index != -1) {
+			this.subjects.splice(index, 1);
+		}
+		this.subjects = this.subjects.join(", ");
+	}
+}
+
+par[1].innerHTML = `Предметы: ${subjects.subjects}.`;
+
+function add_subj() {
+	var a = document.getElementById("num1").value;
+	if(a) {
+		subjects.add(a);
+		par[2].innerHTML = `Результат: ${subjects.subjects}.`;
+	}
+}
+
+function del_subj() {
+	var a = document.getElementById("num1").value;
+	if(a) {
+		subjects.del(a);
+		par[2].innerHTML = `Результат: ${subjects.subjects}.`;
+	}
+}
+btn = document.getElementById("btn");
+btn2 = document.getElementById("btn2");
+btn.onclick = add_subj;
+btn2.onclick = del_subj;
+
+//btn.addEventListener("click", num, false);
+
+</script>
+</body>
+</html>
