@@ -17,9 +17,15 @@
 			width: 200px;
 		}
 		#result {
-			width: 100%;
+			width: 100%;	
 			margin:10px auto;
 			text-align: left;
+		}
+		.ra {
+			box-sizing: border-box;
+			border: solid 1px;
+			min-height: 200px;
+			padding: 10px;
 		}
 	</style>
 </head>
@@ -68,13 +74,20 @@ request.onload = function() {
 }
 var btn = document.getElementById("btn");
 btn.onclick = function () {
-	trpar.texts = ttt.value;
-	request.open('GET', `${trpar.api}?lang=${langs[lng.value]}&text=${trpar.texts}&key=${trpar.key}&options=1&format=html&`, true);
-	request.send();
-	request.onload = function() {
-		hd.innerHTML = "Перевод:";
-		result.innerHTML = (JSON.parse(request.response)["text"]);
-	}
+	result.classList.remove("ra");
+	result.innerHTML = "";
+	hd.innerHTML = "";
+	if(ttt.value) {
+		trpar.texts = ttt.value;
+		request.open('GET', `${trpar.api}?lang=${langs[lng.value]}&text=${trpar.texts}&key=${trpar.key}&options=1&format=html&`, true);
+		request.send();
+		request.onload = function() {
+			hd.innerHTML = "Перевод:";
+			result.classList.add("ra");
+			result.innerHTML = (JSON.parse(request.response)["text"]);
+		}		
+	} else alert("Введите текст в текстовое поле")
+
 }
 </script>
 </body>
